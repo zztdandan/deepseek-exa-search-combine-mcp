@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['20', '22', '24']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Syntax check
+        run: npm run check
+
+      - name: Test
+        run: npm test
+
+  package:
+    name: Package smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Pack
+        run: npm pack
+
+      - name: Install the tarball and run it
+        run: |
+          npm install -g ./deepseek-exa-search-combine-mcp-*.tgz
+          dxsc --version
+          # No keys: the server must refuse to start, with a clear message.
+          if dxsc serve; then
+            echo "expected a non-zero exit without API keys"
+            exit 1
+          fi

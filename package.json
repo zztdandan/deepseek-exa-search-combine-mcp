@@ -1,0 +1,55 @@
+{
+  "name": "deepseek-exa-search-combine-mcp",
+  "version": "1.0.0",
+  "description": "One stdio MCP server that combines DeepSeek and Exa web search into a single, deduplicated result set. Configure both API keys or just one.",
+  "type": "module",
+  "license": "MIT",
+  "author": "zztdandan",
+  "homepage": "https://github.com/zztdandan/deepseek-exa-search-combine-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zztdandan/deepseek-exa-search-combine-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zztdandan/deepseek-exa-search-combine-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "stdio",
+    "search",
+    "web-search",
+    "deepseek",
+    "exa",
+    "ai-agent",
+    "llm-tools"
+  ],
+  "bin": {
+    "dxsc": "./bin/dxsc.mjs",
+    "deepseek-exa-search-combine-mcp": "./bin/dxsc.mjs"
+  },
+  "main": "./src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./server": "./src/server.mjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "README.zh-CN.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node ./bin/dxsc.mjs serve",
+    "test": "node --test \"test/*.test.mjs\"",
+    "test:live": "node --test \"test/live/*.test.mjs\"",
+    "doctor": "node ./bin/dxsc.mjs status",
+    "check": "node ./scripts/check.mjs"
+  }
+}
