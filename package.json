@@ -47,8 +47,8 @@
   },
   "scripts": {
     "start": "node ./bin/dxsc.mjs serve",
-    "test": "node --test \"test/*.test.mjs\"",
-    "test:live": "node --test \"test/live/*.test.mjs\"",
+    "test": "node ./scripts/test.mjs",
+    "test:live": "node ./scripts/test.mjs --live",
     "doctor": "node ./bin/dxsc.mjs status",
     "check": "node ./scripts/check.mjs"
   }
